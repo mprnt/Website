@@ -39,8 +39,8 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[calc(100%-2rem)] lg:w-[70%] mt-4 lg:mt-4 rounded-2xl lg:rounded-2xl ${
         isScrolled
-          ? 'backdrop-blur-l bg-surface/95 border border-border/50 shadow-lg'
-          : 'backdrop-blur-l bg-surface/70 border border-border/30 shadow-md'
+          ? 'backdrop-blur-2xl bg-surface/80 border border-border/40 shadow-xl'
+          : 'backdrop-blur-xl bg-surface/60 border border-border/25 shadow-lg'
       }`}
     >
       <div className="px-6 sm:px-8 lg:px-10">
@@ -76,14 +76,6 @@ export function Navbar() {
           {/* Right side actions */}
           <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
-
-            {/* Desktop CTA */}
-            <button
-              onClick={() => router.push('/scan')}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium text-sm transition-all hover:shadow-lg hover:shadow-primary/25"
-            >
-              Start Printing
-            </button>
 
             {/* Mobile menu button */}
             <button
@@ -122,15 +114,6 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              router.push('/scan');
-            }}
-            className="px-6 py-3 text-sm font-medium text-primary hover:bg-primary/5 border-t border-border/30 transition-colors"
-          >
-            Start Printing
-          </button>
         </nav>
       </div>
     </header>

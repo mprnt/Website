@@ -8,20 +8,20 @@
    ============================================================ */
 
 :root {
-  /* PRIMARY brand color - burnt sienna for reliability + distinctiveness */
-  --color-primary: 212 88 14;        /* Burnt sienna #d4580e */
-  --color-primary-dark: 180 68 10;   /* Darker burnt sienna #b4440a */
-  --color-primary-light: 230 120 40; /* Lighter burnt sienna #e67828 */
+  /* PRIMARY brand color - dark green for sustainability + trust */
+  --color-primary: 34 107 69;        /* Dark green #226d45 */
+  --color-primary-dark: 25 80 50;    /* Darker green #195032 */
+  --color-primary-light: 52 150 94;  /* Lighter green #349e5e */
 
-  /* SECONDARY brand color - muted plum for sophistication */
-  --color-secondary: 107 91 149;     /* Muted plum #6b5b95 */
-  --color-secondary-dark: 85 70 120; /* Darker plum #554678 */
-  --color-secondary-light: 130 115 175; /* Lighter plum #8273af */
+  /* SECONDARY brand color - sage green for balance */
+  --color-secondary: 74 140 107;     /* Sage green #4a8c6b */
+  --color-secondary-dark: 55 105 80; /* Darker sage #376f50 */
+  --color-secondary-light: 110 170 140; /* Lighter sage #6eaa8c */
 
   /* Light mode colors */
-  --color-surface: 250 249 247;      /* Warm off-white #faf9f7 */
-  --color-surface-secondary: 245 243 240; /* Warm light gray #f5f3f0 */
-  --color-border: 220 215 210;       /* Warm border #dcd7d2 */
+  --color-surface: 252 252 250;      /* Off-white #fcfcfa */
+  --color-surface-secondary: 245 245 242; /* Light off-white #f5f5f2 */
+  --color-border: 225 221 216;       /* Soft border #e1ddd8 */
   --color-text: 26 26 26;            /* Near-black #1a1a1a */
   --color-text-muted: 122 122 122;   /* Grounded gray #7a7a7a */
 
@@ -33,15 +33,15 @@
 
 /* Dark mode colors */
 [data-theme="dark"] {
-  --color-surface: 28 27 25;         /* Very dark warm gray #1c1b19 */
-  --color-surface-secondary: 41 38 35; /* Dark warm gray #292623 */
-  --color-border: 70 65 60;          /* Warm dark border #46413c */
-  --color-text: 245 244 241;         /* Off-white #f5f4f1 */
-  --color-text-muted: 160 155 150;   /* Warm light gray #a09b96 */
+  --color-surface: 20 20 18;         /* Very dark #141412 */
+  --color-surface-secondary: 35 34 31; /* Dark gray #232219 */
+  --color-border: 65 62 58;          /* Dark border #413e3a */
+  --color-text: 248 247 245;         /* Off-white #f8f7f5 */
+  --color-text-muted: 160 158 155;   /* Light gray #a09e9b */
 
   /* Adjusted for dark mode visibility */
-  --color-primary-light: 248 140 70; /* Lighter burnt sienna #f88c46 */
-  --color-secondary-light: 160 140 200; /* Lighter plum #a08cc8 */
+  --color-primary-light: 80 190 130; /* Lighter green #50be82 */
+  --color-secondary-light: 130 200 160; /* Lighter sage #82c8a0 */
 }
 
 /* ============================================================
@@ -78,6 +78,58 @@ a {
 
 button {
   font-family: inherit;
+}
+
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-on-scroll-left {
+  opacity: 0;
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-on-scroll-right {
+  opacity: 0;
+  animation: fadeInRight 0.6s ease-out forwards;
 }
 
 /* High contrast for outdoor kiosk visibility */

@@ -4,21 +4,26 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function ForBusinessesPage() {
   const router = useRouter();
+  const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation();
+  const { ref: setupRef, isVisible: setupVisible } = useScrollAnimation();
+  const { ref: pricingRef, isVisible: pricingVisible } = useScrollAnimation();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 pt-16 sm:pt-18">
+      <main className="flex-1">
         {/* Hero */}
         <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 border border-primary/20 text-primary rounded-full mb-4 sm:mb-6 text-xs sm:text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-3 mt-16 sm:px-4 py-1.5 sm:py-2 bg-primary/10 border border-primary/20 text-primary rounded-full mb-4 sm:mb-6 text-xs sm:text-sm font-medium">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
@@ -44,8 +49,8 @@ export default function ForBusinessesPage() {
         </section>
 
         {/* Business Benefits */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-7xl mx-auto">
+        <section ref={benefitsRef} className="px-6 lg:px-8 py-20 lg:py-32">
+          <div className={`max-w-7xl mx-auto transition-all duration-500 ${benefitsVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="text-center mb-16">
               <h2 className="text-4xl lg:text-5xl font-bold text-text mb-4">Why partner with Mprnt?</h2>
               <p className="text-xl text-text-muted max-w-2xl mx-auto">
@@ -118,8 +123,8 @@ export default function ForBusinessesPage() {
         </section>
 
         {/* Management Dashboard */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
-          <div className="max-w-7xl mx-auto">
+        <section ref={setupRef} className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
+          <div className={`max-w-7xl mx-auto transition-all duration-500 ${setupVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl font-bold text-text mb-4">Complete management dashboard</h2>
@@ -348,8 +353,8 @@ export default function ForBusinessesPage() {
         </section>
 
         {/* Pricing Model */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
-          <div className="max-w-4xl mx-auto">
+        <section ref={pricingRef} className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
+          <div className={`max-w-4xl mx-auto transition-all duration-500 ${pricingVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="text-center mb-16">
               <h2 className="text-4xl lg:text-5xl font-bold text-text mb-4">Simple business model</h2>
               <p className="text-xl text-text-muted">
@@ -404,8 +409,8 @@ export default function ForBusinessesPage() {
         </section>
 
         {/* CTA */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
-          <div className="max-w-4xl mx-auto text-center">
+        <section ref={ctaRef} className="px-6 lg:px-8 py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+          <div className={`max-w-4xl mx-auto text-center transition-all duration-500 ${ctaVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <h2 className="text-4xl lg:text-5xl font-bold text-text mb-6">
               Ready to get started?
             </h2>

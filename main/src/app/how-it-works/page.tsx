@@ -4,20 +4,26 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function HowItWorksPage() {
   const router = useRouter();
+  const { ref: step1Ref, isVisible: step1Visible } = useScrollAnimation();
+  const { ref: step2Ref, isVisible: step2Visible } = useScrollAnimation();
+  const { ref: step3Ref, isVisible: step3Visible } = useScrollAnimation();
+  const { ref: step4Ref, isVisible: step4Visible } = useScrollAnimation();
+  const { ref: step5Ref, isVisible: step5Visible } = useScrollAnimation();
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 pt-16 sm:pt-18">
+      <main className="flex-1">
         {/* Hero */}
         <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-transparent">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 sm:mb-6 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 mt-16 sm:mb-6 tracking-tight">
               How Mprnt works
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4">
@@ -27,8 +33,8 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Step 1: Scan QR Code */}
-        <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
-          <div className="max-w-6xl mx-auto">
+        <section ref={step1Ref} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
+          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step1Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               <div>
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 shadow-lg shadow-primary/30">
@@ -87,8 +93,8 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Step 2: Upload Document */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
-          <div className="max-w-6xl mx-auto">
+        <section ref={step2Ref} className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
+          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step2Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="relative max-w-sm mx-auto">
@@ -188,8 +194,8 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Step 3: Configure Print Settings */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-6xl mx-auto">
+        <section ref={step3Ref} className="px-6 lg:px-8 py-20 lg:py-32">
+          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step3Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white font-bold text-2xl mb-6 shadow-lg shadow-primary/30">
@@ -334,8 +340,8 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Step 4: Pay Securely */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
-          <div className="max-w-6xl mx-auto">
+        <section ref={step4Ref} className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
+          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step4Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="relative max-w-sm mx-auto">
@@ -472,8 +478,8 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Step 5: Collect Prints */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-6xl mx-auto">
+        <section ref={step5Ref} className="px-6 lg:px-8 py-20 lg:py-32">
+          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step5Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white font-bold text-2xl mb-6 shadow-lg shadow-primary/30">
@@ -588,15 +594,26 @@ export default function HowItWorksPage() {
             <p className="text-xl text-text-muted mb-10 max-w-2xl mx-auto">
               Find an Mprnt kiosk near you and try the fastest way to print from your phone
             </p>
-            <button
-              onClick={() => router.push('/scan')}
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-lg transition-all shadow-lg shadow-primary/20"
-            >
-              <span>Start printing now</span>
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {/* <Link
+                href="/"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-lg transition-all shadow-lg shadow-primary/20"
+              >
+                <span>Back to home</span>
+                <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </Link> */}
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-surface-secondary border border-border hover:border-primary/40 text-text rounded-lg font-semibold text-lg transition-all"
+              >
+                <span>Get in touch</span>
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </section>
       </main>

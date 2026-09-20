@@ -68,11 +68,11 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 pt-16 sm:pt-18">
+      <main className="flex-1">
         {/* Hero */}
         <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-transparent">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 sm:mb-6 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 mt-16 sm:mb-6 tracking-tight">
               Get in touch
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4">

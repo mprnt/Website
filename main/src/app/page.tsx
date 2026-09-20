@@ -4,9 +4,14 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function HomePage() {
   const router = useRouter();
+  const { ref: howItWorksRef, isVisible: howItWorksVisible } = useScrollAnimation();
+  const { ref: capabilitiesRef, isVisible: capabilitiesVisible } = useScrollAnimation();
+  const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation();
+  const { ref: ecosystemRef, isVisible: ecosystemVisible } = useScrollAnimation();
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
@@ -34,24 +39,23 @@ export default function HomePage() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
-                  <button
-                    onClick={() => router.push('/scan')}
+                  <Link
+                    href="/how-it-works"
                     className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-base sm:text-lg transition-all shadow-lg shadow-primary/20 sm:flex-1"
                   >
-                    <span>Try it now</span>
+                    <span>Learn More</span>
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
-                  </button>
+                  </Link>
                   <Link
-                    href="/how-it-works"
+                    href="/for-businesses"
                     className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-surface-secondary border border-border hover:border-primary/40 text-text rounded-lg font-semibold text-base sm:text-lg transition-all sm:flex-1"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                     </svg>
-                    See how it works
+                    For Businesses
                   </Link>
                 </div>
 
@@ -120,8 +124,8 @@ export default function HomePage() {
         </section>
 
         {/* How It Works - Overview */}
-        <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 bg-surface-secondary">
-          <div className="max-w-7xl mx-auto">
+        <section ref={howItWorksRef} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 bg-surface-secondary">
+          <div className={`max-w-7xl mx-auto transition-all duration-500 ${howItWorksVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="text-center mb-8 sm:mb-12 md:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-3 sm:mb-4">How it works</h2>
               <p className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4">
@@ -240,8 +244,8 @@ export default function HomePage() {
         </section>
 
         {/* Product Capabilities */}
-        <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
-          <div className="max-w-7xl mx-auto">
+        <section ref={capabilitiesRef} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
+          <div className={`max-w-7xl mx-auto transition-all duration-500 ${capabilitiesVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="text-center mb-8 sm:mb-12 md:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-3 sm:mb-4">Built for reliability</h2>
               <p className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4">
@@ -314,8 +318,8 @@ export default function HomePage() {
         </section>
 
         {/* Benefits Split: Customer + Business */}
-        <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 bg-surface-secondary">
-          <div className="max-w-7xl mx-auto">
+        <section ref={benefitsRef} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 bg-surface-secondary">
+          <div className={`max-w-7xl mx-auto transition-all duration-500 ${benefitsVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
               {/* For Customers */}
               <div>
@@ -441,8 +445,8 @@ export default function HomePage() {
         </section>
 
         {/* Hardware + Software Ecosystem */}
-        <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
-          <div className="max-w-7xl mx-auto">
+        <section ref={ecosystemRef} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
+          <div className={`max-w-7xl mx-auto transition-all duration-500 ${ecosystemVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="text-center mb-8 sm:mb-12 md:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-3 sm:mb-4">Complete ecosystem</h2>
               <p className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4">
@@ -575,15 +579,15 @@ export default function HomePage() {
               Find an Mprnt kiosk near you or learn how to bring one to your venue
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <button
-                onClick={() => router.push('/scan')}
+              <Link
+                href="/how-it-works"
                 className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-base sm:text-lg transition-all shadow-lg shadow-primary/20"
               >
-                <span>Start printing</span>
+                <span>How it works</span>
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </button>
+              </Link>
               <Link
                 href="/for-businesses"
                 className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-surface border border-border hover:border-primary/40 text-text rounded-lg font-semibold text-base sm:text-lg transition-all"
