@@ -244,7 +244,7 @@ export default function HowItWorksPage() {
                 </div>
               </div>
 
-              <div className="relative max-w-sm mx-auto">
+              <div className="relative max-w-sm mx-auto₹">
                 <div className="bg-gradient-to-b from-border to-border/50 rounded-[3rem] p-3 shadow-2xl">
                   <div className="bg-surface rounded-[2.5rem] overflow-hidden">
                     <div className="h-12 bg-surface flex items-center justify-between px-6">

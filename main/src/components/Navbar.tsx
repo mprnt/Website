@@ -34,7 +34,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[70%] mt-4 rounded-2xl ${
+      className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[calc(100%-2rem)] lg:w-[70%] mt-4 lg:mt-4 rounded-2xl lg:rounded-2xl ${
         isScrolled
           ? 'backdrop-blur-xl bg-surface/95 border border-border/50 shadow-lg'
           : 'backdrop-blur-xl bg-surface/70 border border-border/30 shadow-md'
@@ -103,54 +103,50 @@ export function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div
-        className={`lg:hidden fixed inset-0 top-16 sm:top-18 transition-all duration-300 ${
-          isMobileMenuOpen
-            ? 'opacity-100 pointer-events-auto z-50'
-            : 'opacity-0 pointer-events-none -z-10'
-        }`}
-      >
-        {/* Backdrop with strong blur */}
-        <div
-          className="absolute inset-0 bg-black/70"
-          style={{ backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
+      {isMobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="lg:hidden fixed inset-0 top-20 sm:top-24 bg-black/70 z-40"
+            style={{ backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
 
-        {/* Menu panel */}
-        <div
-          className="relative h-full bg-surface shadow-2xl border-l border-border/50"
-          style={{ backdropFilter: 'blur(40px)', WebkitBackdropFilter: 'blur(40px)' }}
-        >
-          <nav className="flex flex-col p-6 space-y-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-base font-medium text-text-muted hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-lg transition-all"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {/* Menu panel - slide from right */}
+          <div
+            className="lg:hidden fixed top-20 sm:top-24 right-0 bottom-0 w-80 bg-surface shadow-2xl border-l border-border/30 overflow-y-auto z-50 animate-in slide-in-from-right"
+            style={{ backdropFilter: 'blur(40px)', WebkitBackdropFilter: 'blur(40px)' }}
+          >
+            <nav className="flex flex-col p-6 space-y-1 mt-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-base font-medium text-text hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-lg transition-all"
+                >
+                  {link.label}
+                </Link>
+              ))}
 
-          <div className="pt-4 border-t border-border/50 mt-4">
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                router.push('/scan');
-              }}
-              className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-base transition-all shadow-lg shadow-primary/25"
-            >
-              <span>Start Printing</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </button>
+              <div className="pt-6 border-t border-border/30 mt-6">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    router.push('/scan');
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-base transition-all shadow-lg shadow-primary/25"
+                >
+                  <span>Start Printing</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </button>
+              </div>
+            </nav>
           </div>
-        </nav>
-        </div>
-      </div>
+        </>
+      )}
     </header>
   );
 }
