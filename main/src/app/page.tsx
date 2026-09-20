@@ -36,7 +36,7 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
                   <button
                     onClick={() => router.push('/scan')}
-                    className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-base sm:text-lg transition-all shadow-lg shadow-primary/20"
+                    className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-base sm:text-lg transition-all shadow-lg shadow-primary/20 sm:flex-1"
                   >
                     <span>Try it now</span>
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@ export default function HomePage() {
                   </button>
                   <Link
                     href="/how-it-works"
-                    className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-surface-secondary border border-border hover:border-primary/40 text-text rounded-lg font-semibold text-base sm:text-lg transition-all"
+                    className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-surface-secondary border border-border hover:border-primary/40 text-text rounded-lg font-semibold text-base sm:text-lg transition-all sm:flex-1"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -78,9 +78,9 @@ export default function HomePage() {
                   {/* Kiosk Mockup */}
                   <div className="bg-gradient-to-b from-border/50 to-border/20 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 mb-4 sm:mb-6">
                     <div className="bg-surface rounded-lg p-4 sm:p-6 md:p-8 text-center">
-                      <div className="inline-block p-4 sm:p-6 md:p-8 bg-white rounded-lg mb-3 sm:mb-4">
+                      <div className="inline-block p-2 sm:p-4 md:p-6 lg:p-8 bg-white rounded-lg mb-3 sm:mb-4">
                         {/* QR Code placeholder */}
-                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 grid grid-cols-8 gap-1">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 grid grid-cols-8 gap-0.5 sm:gap-1">
                           {[...Array(64)].map((_, i) => (
                             <div key={i} className={`${(i * 17 + 3) % 7 < 3 ? 'bg-gray-900' : 'bg-white'}`}></div>
                           ))}

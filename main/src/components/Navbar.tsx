@@ -39,8 +39,8 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[calc(100%-2rem)] lg:w-[70%] mt-4 lg:mt-4 rounded-2xl lg:rounded-2xl ${
         isScrolled
-          ? 'backdrop-blur-xl bg-surface/95 border border-border/50 shadow-lg'
-          : 'backdrop-blur-xl bg-surface/70 border border-border/30 shadow-md'
+          ? 'backdrop-blur-l bg-surface/95 border border-border/50 shadow-lg'
+          : 'backdrop-blur-l bg-surface/70 border border-border/30 shadow-md'
       }`}
     >
       <div className="px-6 sm:px-8 lg:px-10">
