@@ -22,26 +22,6 @@ Traditional printing shops suffer from slow counter queues, friction in file tra
 * **Support Staff:** Handling paper jams, refunds, and device troubleshooting.
 * **Super Admins:** Global system configuration and tenant management.
 
-## Repository/File Structure
-See `engineering/PROJECT_STRUCTURE.md` for the full repository layout.
-
 ## MVP Scope vs Future Scope
 * **MVP:** QR-based web flow, single document upload, basic pricing, simulated/test payments, Raspberry Pi print execution, basic admin dashboard.
 * **Future:** Multi-page advanced splitting, user accounts, cloud printing fleet management, loyalty programs, and loyalty discounts.
-
----
-
-# Recommended Starting Point (First 10 Tasks)
-
-Before serious development begins, the team must complete these 10 concrete tasks:
-
-1. **Agree on the customer journey:** Walk through the mobile web flow wireframes and validate step count.
-2. **Define MVP scope:** Freeze the feature list to prevent scope creep (see `product/MVP_SCOPE.md`).
-3. **Finalize system architecture:** Review and sign off on `architecture/SYSTEM_DESIGN.md` and diagrams.
-4. **Design the database:** Validate entities, foreign keys, and indexes in `database/DATABASE_DESIGN.md`.
-5. **Define print-job states:** Review all edge-case states in `security/FAILURE_HANDLING.md`.
-6. **Define API boundaries:** Finalize request/response payloads in `backend/API_DESIGN.md`.
-7. **Select the payment approach:** Choose the test-mode configuration for [PAYMENT_GATEWAY].
-8. **Select the Raspberry Pi communication approach:** Choose between HTTP Polling, WebSockets, or MQTT for the prototype (see `hardware/RASPBERRY_PI_DESIGN.md`).
-9. **Design the initial UI:** Review mobile screens and the admin dashboard spec.
-10. **Divide work among team members:** Assign workstreams using `team/TEAM_TASK_BREAKDOWN.md`.
