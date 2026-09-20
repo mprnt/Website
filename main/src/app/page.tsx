@@ -8,6 +8,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function HomePage() {
   const router = useRouter();
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { ref: howItWorksRef, isVisible: howItWorksVisible } = useScrollAnimation();
   const { ref: capabilitiesRef, isVisible: capabilitiesVisible } = useScrollAnimation();
   const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation();
@@ -20,7 +21,7 @@ export default function HomePage() {
       {/* Main Content */}
       <main className="flex-1 pt-20 sm:pt-24">
         {/* Hero Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden bg-surface">
+        <section ref={heroRef} className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden bg-surface">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
               {/* Left: Content */}
@@ -30,11 +31,11 @@ export default function HomePage() {
                   Self-service printing kiosks
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-text mb-4 sm:mb-6 leading-[1.1] sm:leading-[1.05] tracking-tight">
+                <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-text mb-4 sm:mb-6 leading-[1.1] sm:leading-[1.05] tracking-tight transition-all duration-700 ${heroVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
                   Print from your phone in seconds
                 </h1>
 
-                <p className="text-base sm:text-lg md:text-xl text-text-muted leading-relaxed mb-6 sm:mb-8">
+                <p className={`text-base sm:text-lg md:text-xl text-text-muted leading-relaxed mb-6 sm:mb-8 transition-all duration-700 delay-100 ${heroVisible ? 'animate-on-scroll-slide-up' : 'opacity-0'}`}>
                   Scan a QR code, upload your document, configure print settings, pay instantly, and collect your prints. No apps, no sign-ups.
                 </p>
 
@@ -135,7 +136,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
               {/* Step 1 */}
-              <div className="text-center">
+              <div className={`text-center transition-all duration-700 ${howItWorksVisible ? 'animate-on-scroll-pop animate-stagger-1' : 'opacity-0'}`}>
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   1
                 </div>
@@ -153,7 +154,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 2 */}
-              <div className="text-center">
+              <div className={`text-center transition-all duration-700 ${howItWorksVisible ? 'animate-on-scroll-pop animate-stagger-2' : 'opacity-0'}`}>
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   2
                 </div>
@@ -169,7 +170,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 3 */}
-              <div className="text-center sm:col-span-1">
+              <div className={`text-center sm:col-span-1 transition-all duration-700 ${howItWorksVisible ? 'animate-on-scroll-pop animate-stagger-3' : 'opacity-0'}`}>
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   3
                 </div>
@@ -188,7 +189,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 4 */}
-              <div className="text-center">
+              <div className={`text-center transition-all duration-700 ${howItWorksVisible ? 'animate-on-scroll-pop animate-stagger-4' : 'opacity-0'}`}>
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   4
                 </div>
@@ -209,7 +210,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 5 */}
-              <div className="text-center sm:col-span-1">
+              <div className={`text-center sm:col-span-1 transition-all duration-700 ${howItWorksVisible ? 'animate-on-scroll-pop animate-stagger-5' : 'opacity-0'}`}>
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   5
                 </div>
@@ -254,7 +255,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              <div className="p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all">
+              <div className={`p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all ${capabilitiesVisible ? 'animate-on-scroll-scale animate-stagger-1' : 'opacity-0'}`}>
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center mb-3 sm:mb-4">
                   <svg className="w-5 h-5 sm:w-6 sm:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -264,7 +265,7 @@ export default function HomePage() {
                 <p className="text-sm sm:text-base text-text-muted">Professional laser printers deliver crisp output in under 30 seconds</p>
               </div>
 
-              <div className="p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all">
+              <div className={`p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all ${capabilitiesVisible ? 'animate-on-scroll-scale animate-stagger-2' : 'opacity-0'}`}>
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -274,7 +275,7 @@ export default function HomePage() {
                 <p className="text-text-muted">Time-limited QR codes and encrypted connections protect your documents</p>
               </div>
 
-              <div className="p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all">
+              <div className={`p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all ${capabilitiesVisible ? 'animate-on-scroll-scale animate-stagger-2' : 'opacity-0'}`}>
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -284,7 +285,7 @@ export default function HomePage() {
                 <p className="text-text-muted">Optimized web interface works on any smartphone, no app required</p>
               </div>
 
-              <div className="p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all">
+              <div className={`p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all ${capabilitiesVisible ? 'animate-on-scroll-scale animate-stagger-2' : 'opacity-0'}`}>
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
@@ -294,7 +295,7 @@ export default function HomePage() {
                 <p className="text-text-muted">Accept UPI, credit/debit cards, and digital wallets</p>
               </div>
 
-              <div className="p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all">
+              <div className={`p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all ${capabilitiesVisible ? 'animate-on-scroll-scale animate-stagger-2' : 'opacity-0'}`}>
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -304,7 +305,7 @@ export default function HomePage() {
                 <p className="text-text-muted">Handle PDF, PNG, and JPEG files up to 10MB</p>
               </div>
 
-              <div className="p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all">
+              <div className={`p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all ${capabilitiesVisible ? 'animate-on-scroll-scale animate-stagger-2' : 'opacity-0'}`}>
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -322,7 +323,7 @@ export default function HomePage() {
           <div className={`max-w-7xl mx-auto transition-all duration-500 ${benefitsVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
               {/* For Customers */}
-              <div>
+              <div className={`transition-all duration-700 ${benefitsVisible ? 'animate-on-scroll-left' : 'opacity-0'}`}>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text mb-6 sm:mb-8">For everyone</h2>
                 <div className="space-y-4 sm:space-y-6">
                   <div className="flex gap-4">
@@ -376,7 +377,7 @@ export default function HomePage() {
               </div>
 
               {/* For Businesses */}
-              <div>
+              <div className={`transition-all duration-700 ${benefitsVisible ? 'animate-on-scroll-right' : 'opacity-0'}`}>
                 <h2 className="text-3xl lg:text-4xl font-bold text-text mb-8">For venue owners</h2>
                 <div className="space-y-6">
                   <div className="flex gap-4">
@@ -456,7 +457,7 @@ export default function HomePage() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {/* Hardware */}
-              <div className="relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
+              <div className={`relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 transition-all duration-700 ${ecosystemVisible ? 'animate-on-scroll-rotate animate-stagger-1' : 'opacity-0'}`}>
                 <div className="absolute top-4 right-4 px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full">
                   HARDWARE
                 </div>
@@ -489,7 +490,7 @@ export default function HomePage() {
               </div>
 
               {/* Software */}
-              <div className="relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
+              <div className={`relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 transition-all duration-700 ${ecosystemVisible ? 'animate-on-scroll-blur animate-stagger-2' : 'opacity-0'}`}>
                 <div className="absolute top-4 right-4 px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full">
                   SOFTWARE
                 </div>
@@ -527,7 +528,7 @@ export default function HomePage() {
               </div>
 
               {/* Cloud */}
-              <div className="relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
+              <div className={`relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 transition-all duration-700 ${ecosystemVisible ? 'animate-on-scroll-slide-up animate-stagger-3' : 'opacity-0'}`}>
                 <div className="absolute top-4 right-4 px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full">
                   CLOUD
                 </div>

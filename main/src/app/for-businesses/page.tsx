@@ -8,7 +8,9 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function ForBusinessesPage() {
   const router = useRouter();
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation();
+  const { ref: useCasesRef, isVisible: useCasesVisible } = useScrollAnimation();
   const { ref: setupRef, isVisible: setupVisible } = useScrollAnimation();
   const { ref: pricingRef, isVisible: pricingVisible } = useScrollAnimation();
   const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
@@ -20,19 +22,19 @@ export default function ForBusinessesPage() {
       {/* Main Content */}
       <main className="flex-1">
         {/* Hero */}
-        <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+        <section ref={heroRef} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-3 mt-16 sm:px-4 py-1.5 sm:py-2 bg-primary/10 border border-primary/20 text-primary rounded-full mb-4 sm:mb-6 text-xs sm:text-sm font-medium">
+              <div className={`inline-flex items-center gap-2 px-3 mt-16 sm:px-4 py-1.5 sm:py-2 bg-primary/10 border border-primary/20 text-primary rounded-full mb-4 sm:mb-6 text-xs sm:text-sm font-medium transition-all duration-700 ${heroVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
                 For venue owners and operators
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-text mb-4 sm:mb-6 tracking-tight">
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-text mb-4 sm:mb-6 tracking-tight transition-all duration-700 delay-100 ${heroVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
                 Turn your space into a revenue stream
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-text-muted mb-8 sm:mb-10 max-w-3xl mx-auto px-4">
+              <p className={`text-base sm:text-lg md:text-xl text-text-muted mb-8 sm:mb-10 max-w-3xl mx-auto px-4 transition-all duration-700 delay-200 ${heroVisible ? 'animate-on-scroll-slide-up' : 'opacity-0'}`}>
                 Install an Mprnt kiosk and earn passive income while providing a valuable service to your customers. Complete hardware, software, and support included.
               </p>
               <button
@@ -59,7 +61,7 @@ export default function ForBusinessesPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all">
+              <div className={`p-8 rounded-2xl bg-surface-secondary border border-border hover:border-primary/40 transition-all ${benefitsVisible ? 'animate-on-scroll-scale animate-stagger-1' : 'opacity-0'}`}>
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -259,8 +261,8 @@ export default function ForBusinessesPage() {
         </section>
 
         {/* Ideal Locations */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-7xl mx-auto">
+        <section ref={useCasesRef} className="px-6 lg:px-8 py-20 lg:py-32">
+          <div className={`max-w-7xl mx-auto transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
             <div className="text-center mb-16">
               <h2 className="text-4xl lg:text-5xl font-bold text-text mb-4">Perfect for</h2>
               <p className="text-xl text-text-muted max-w-2xl mx-auto">
@@ -269,7 +271,7 @@ export default function ForBusinessesPage() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop animate-stagger-1' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -279,7 +281,7 @@ export default function ForBusinessesPage() {
                 <p className="text-sm text-text-muted">Students and researchers need quick document printing</p>
               </div>
 
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -289,7 +291,7 @@ export default function ForBusinessesPage() {
                 <p className="text-sm text-text-muted">Remote workers need on-demand printing services</p>
               </div>
 
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -299,7 +301,7 @@ export default function ForBusinessesPage() {
                 <p className="text-sm text-text-muted">Additional revenue stream with minimal effort</p>
               </div>
 
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -309,7 +311,7 @@ export default function ForBusinessesPage() {
                 <p className="text-sm text-text-muted">Business travelers appreciate convenient printing</p>
               </div>
 
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -319,7 +321,7 @@ export default function ForBusinessesPage() {
                 <p className="text-sm text-text-muted">Students and freelancers working on-site</p>
               </div>
 
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -329,7 +331,7 @@ export default function ForBusinessesPage() {
                 <p className="text-sm text-text-muted">High-volume printing needs across campus</p>
               </div>
 
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -339,7 +341,7 @@ export default function ForBusinessesPage() {
                 <p className="text-sm text-text-muted">Essential service for local residents</p>
               </div>
 
-              <div className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
+              <div className={`p-6 rounded-xl bg-surface-secondary border border-border text-center transition-all duration-700 ${useCasesVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -410,7 +412,7 @@ export default function ForBusinessesPage() {
 
         {/* CTA */}
         <section ref={ctaRef} className="px-6 lg:px-8 py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
-          <div className={`max-w-4xl mx-auto text-center transition-all duration-500 ${ctaVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
+          <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${ctaVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
             <h2 className="text-4xl lg:text-5xl font-bold text-text mb-6">
               Ready to get started?
             </h2>

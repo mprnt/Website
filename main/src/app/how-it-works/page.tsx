@@ -8,11 +8,13 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function HowItWorksPage() {
   const router = useRouter();
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { ref: step1Ref, isVisible: step1Visible } = useScrollAnimation();
   const { ref: step2Ref, isVisible: step2Visible } = useScrollAnimation();
   const { ref: step3Ref, isVisible: step3Visible } = useScrollAnimation();
   const { ref: step4Ref, isVisible: step4Visible } = useScrollAnimation();
   const { ref: step5Ref, isVisible: step5Visible } = useScrollAnimation();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
@@ -21,12 +23,12 @@ export default function HowItWorksPage() {
       {/* Main Content */}
       <main className="flex-1">
         {/* Hero */}
-        <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-transparent">
+        <section ref={heroRef} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-transparent">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 mt-16 sm:mb-6 tracking-tight">
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4 mt-16 sm:mb-6 tracking-tight transition-all duration-700 ${heroVisible ? 'animate-on-scroll' : 'opacity-0'}`}>
               How Mprnt works
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4">
+            <p className={`text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4 transition-all duration-700 delay-100 ${heroVisible ? 'animate-on-scroll-slide-up' : 'opacity-0'}`}>
               From scanning a QR code to holding your printed documents - the complete journey in five simple steps
             </p>
           </div>
@@ -34,7 +36,7 @@ export default function HowItWorksPage() {
 
         {/* Step 1: Scan QR Code */}
         <section ref={step1Ref} className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
-          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step1Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
+          <div className={`max-w-6xl mx-auto transition-all duration-700 ${step1Visible ? 'animate-on-scroll-left' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               <div>
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 shadow-lg shadow-primary/30">
@@ -94,7 +96,7 @@ export default function HowItWorksPage() {
 
         {/* Step 2: Upload Document */}
         <section ref={step2Ref} className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
-          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step2Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
+          <div className={`max-w-6xl mx-auto transition-all duration-700 ${step2Visible ? 'animate-on-scroll-right' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="relative max-w-sm mx-auto">
@@ -195,7 +197,7 @@ export default function HowItWorksPage() {
 
         {/* Step 3: Configure Print Settings */}
         <section ref={step3Ref} className="px-6 lg:px-8 py-20 lg:py-32">
-          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step3Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
+          <div className={`max-w-6xl mx-auto transition-all duration-700 ${step3Visible ? 'animate-on-scroll-scale' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white font-bold text-2xl mb-6 shadow-lg shadow-primary/30">
@@ -341,7 +343,7 @@ export default function HowItWorksPage() {
 
         {/* Step 4: Pay Securely */}
         <section ref={step4Ref} className="px-6 lg:px-8 py-20 lg:py-32 bg-surface-secondary">
-          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step4Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
+          <div className={`max-w-6xl mx-auto transition-all duration-700 ${step4Visible ? 'animate-on-scroll-blur' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="relative max-w-sm mx-auto">
@@ -479,7 +481,7 @@ export default function HowItWorksPage() {
 
         {/* Step 5: Collect Prints */}
         <section ref={step5Ref} className="px-6 lg:px-8 py-20 lg:py-32">
-          <div className={`max-w-6xl mx-auto transition-all duration-500 ${step5Visible ? 'animate-on-scroll' : 'opacity-0'}`}>
+          <div className={`max-w-6xl mx-auto transition-all duration-700 ${step5Visible ? 'animate-on-scroll-slide-up' : 'opacity-0'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white font-bold text-2xl mb-6 shadow-lg shadow-primary/30">
@@ -586,8 +588,8 @@ export default function HowItWorksPage() {
         </section>
 
         {/* CTA */}
-        <section className="px-6 lg:px-8 py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
-          <div className="max-w-4xl mx-auto text-center">
+        <section ref={ctaRef} className="px-6 lg:px-8 py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+          <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${ctaVisible ? 'animate-on-scroll-pop' : 'opacity-0'}`}>
             <h2 className="text-4xl lg:text-5xl font-bold text-text mb-6">
               Experience it yourself
             </h2>
