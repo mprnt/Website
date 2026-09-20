@@ -105,62 +105,33 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu - Full screen overlay */}
+      {/* Mobile menu - Simple dropdown */}
       <div
-        className={`lg:hidden fixed inset-0 z-40 bg-surface/95 overflow-y-auto transition-opacity duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        className={`lg:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-surface border border-border/30 rounded-xl shadow-lg overflow-hidden transition-all duration-200 origin-top ${
+          isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-95 opacity-0 pointer-events-none'
         }`}
-        style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}
       >
-        <div className="min-h-screen flex flex-col pt-24 pb-8 px-6">
-          {/* Navigation Links */}
-          <nav className="flex flex-col gap-2 mb-12">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-2xl font-bold text-text hover:text-primary transition-colors py-4 px-4 hover:bg-primary/5 rounded-lg"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* CTA Button */}
+        <nav className="flex flex-col py-2">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-6 py-3 text-sm font-medium text-text hover:bg-primary/5 hover:text-primary transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
           <button
             onClick={() => {
               setIsMobileMenuOpen(false);
               router.push('/scan');
             }}
-            className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-primary hover:bg-primary/90 text-white rounded-xl font-semibold text-lg transition-all shadow-lg shadow-primary/25 mb-8"
+            className="px-6 py-3 text-sm font-medium text-primary hover:bg-primary/5 border-t border-border/30 transition-colors"
           >
-            <span>Start Printing</span>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            Start Printing
           </button>
-
-          {/* Spacer */}
-          <div className="flex-1" />
-
-          {/* Footer Links */}
-          <div className="border-t border-border/30 pt-8 text-sm">
-            <div className="flex flex-wrap gap-4 text-text-muted">
-              <Link href="/terms" className="hover:text-primary transition-colors">
-                Terms
-              </Link>
-              <span className="text-border">•</span>
-              <Link href="/privacy" className="hover:text-primary transition-colors">
-                Privacy
-              </Link>
-              <span className="text-border">•</span>
-              <Link href="/contact" className="hover:text-primary transition-colors">
-                Support
-              </Link>
-            </div>
-          </div>
-        </div>
+        </nav>
       </div>
     </header>
   );
