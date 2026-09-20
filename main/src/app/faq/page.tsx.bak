@@ -1,0 +1,242 @@
+'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Footer } from '@/components/Footer';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { useState } from 'react';
+
+const faqs = [
+  {
+    category: 'Getting Started',
+    questions: [
+      {
+        q: 'How do I use an Mprnt kiosk?',
+        a: 'Simply scan the QR code displayed on the kiosk screen with your phone camera. You\'ll be directed to a web page where you can upload your document, configure print settings, and pay securely. Your prints will be ready in about 30 seconds.',
+      },
+      {
+        q: 'Do I need to install an app?',
+        a: 'No app installation required! Mprnt works through your phone\'s web browser. Just scan the QR code and you\'re ready to print.',
+      },
+      {
+        q: 'What file formats are supported?',
+        a: 'We support PDF documents and image files (PNG, JPEG). Maximum file size is 10MB per document.',
+      },
+    ],
+  },
+  {
+    category: 'Pricing & Payment',
+    questions: [
+      {
+        q: 'How much does printing cost?',
+        a: 'Black & white printing starts at ₹2 per page, and color printing starts at ₹8 per page. Exact pricing may vary by location and is displayed before you confirm your order.',
+      },
+      {
+        q: 'What payment methods do you accept?',
+        a: 'We accept UPI (GPay, PhonePe, Paytm), credit/debit cards (Visa, Mastercard, RuPay), and digital wallets (Amazon Pay, Mobikwik).',
+      },
+      {
+        q: 'Can I get a refund?',
+        a: 'Refunds are provided only if payment was processed but printing failed due to a technical error. Refunds for user errors or document formatting issues are not available.',
+      },
+    ],
+  },
+  {
+    category: 'Security & Privacy',
+    questions: [
+      {
+        q: 'Is my document secure?',
+        a: 'Yes. All uploads are encrypted during transmission and storage. Your document is automatically deleted immediately after printing or within 15 minutes, whichever comes first.',
+      },
+      {
+        q: 'Do you store my documents?',
+        a: 'No. Documents are temporarily stored only for the duration needed to print them, then immediately deleted. We do not access, read, or permanently store any document content.',
+      },
+      {
+        q: 'Is payment information safe?',
+        a: 'Absolutely. All payment processing is handled by PCI DSS compliant gateways with bank-grade encryption. We never store your complete card details or banking passwords.',
+      },
+    ],
+  },
+  {
+    category: 'Technical Issues',
+    questions: [
+      {
+        q: 'What if the kiosk is not working?',
+        a: 'Kiosks have real-time monitoring. If a kiosk is offline, it will display an error message. Try another nearby kiosk or contact support at support@mprint.co.',
+      },
+      {
+        q: 'My payment went through but nothing printed. What do I do?',
+        a: 'Check the output tray first. If your prints are not there, contact support@mprint.co with your transaction ID within 48 hours for a refund.',
+      },
+      {
+        q: 'Can I print double-sided?',
+        a: 'Currently, all prints are single-sided. Double-sided printing will be available in a future update.',
+      },
+      {
+        q: 'Why is my document not uploading?',
+        a: 'Ensure your file is under 10MB and in a supported format (PDF, PNG, JPEG). Check your internet connection. If issues persist, try a different browser.',
+      },
+    ],
+  },
+  {
+    category: 'For Businesses',
+    questions: [
+      {
+        q: 'How do I install an Mprnt kiosk at my location?',
+        a: 'Fill out our contact form or email us at business@mprint.co. We\'ll discuss location requirements, installation, pricing, and next steps.',
+      },
+      {
+        q: 'What revenue share do venue owners receive?',
+        a: 'Venue owners keep 80% of all transaction revenue. The 20% platform fee covers software, cloud infrastructure, payment processing, and 24/7 support.',
+      },
+      {
+        q: 'What kind of support do you provide?',
+        a: 'We provide complete installation, technical support, remote diagnostics, and an admin dashboard for monitoring revenue and device health. Support is available 24/7 for technical issues.',
+      },
+    ],
+  },
+];
+
+export default function FAQPage() {
+  const router = useRouter();
+  const [openIndex, setOpenIndex] = useState<string | null>(null);
+
+  const toggleQuestion = (category: string, index: number) => {
+    const key = `${category}-${index}`;
+    setOpenIndex(openIndex === key ? null : key);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-surface">
+      {/* Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-surface/80 border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
+                <svg className="w-9 h-9 text-primary relative" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+                </svg>
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="text-xl font-bold text-text tracking-tight">Mprnt</span>
+                <span className="text-[9px] text-text-muted tracking-widest uppercase">Smart Printing</span>
+              </div>
+            </Link>
+
+            <nav className="hidden md:flex items-center gap-8">
+              <Link href="/how-it-works" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">
+                How it works
+              </Link>
+              <Link href="/for-businesses" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">
+                For Businesses
+              </Link>
+              <Link href="/contact" className="text-sm font-medium text-text-muted hover:text-primary transition-colors">
+                Contact
+              </Link>
+            </nav>
+
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <button
+                onClick={() => router.push('/scan')}
+                className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium text-sm transition-all"
+              >
+                Start Printing
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 pt-20">
+        {/* Hero */}
+        <section className="px-6 lg:px-8 py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-transparent">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl lg:text-6xl font-bold text-text mb-6 tracking-tight">
+              Frequently Asked Questions
+            </h1>
+            <p className="text-xl text-text-muted max-w-2xl mx-auto">
+              Quick answers to common questions about Mprnt
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ Content */}
+        <section className="px-6 lg:px-8 py-20 lg:py-32">
+          <div className="max-w-4xl mx-auto space-y-12">
+            {faqs.map((category) => (
+              <div key={category.category}>
+                <h2 className="text-2xl font-bold text-text mb-6">{category.category}</h2>
+                <div className="space-y-4">
+                  {category.questions.map((faq, index) => {
+                    const key = `${category.category}-${index}`;
+                    const isOpen = openIndex === key;
+
+                    return (
+                      <div
+                        key={index}
+                        className="bg-surface-secondary border border-border rounded-xl overflow-hidden"
+                      >
+                        <button
+                          onClick={() => toggleQuestion(category.category, index)}
+                          className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-border/20 transition-colors"
+                        >
+                          <span className="font-semibold text-text pr-4">{faq.q}</span>
+                          <svg
+                            className={`w-5 h-5 text-primary flex-shrink-0 transition-transform ${
+                              isOpen ? 'rotate-180' : ''
+                            }`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+                        {isOpen && (
+                          <div className="px-6 pb-5">
+                            <p className="text-text-muted leading-relaxed">{faq.a}</p>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Still have questions */}
+        <section className="px-6 lg:px-8 py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold text-text mb-6">Still have questions?</h2>
+            <p className="text-xl text-text-muted mb-10 max-w-2xl mx-auto">
+              Can't find what you're looking for? Our support team is here to help.
+            </p>
+            <button
+              onClick={() => router.push('/contact')}
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-lg transition-all shadow-lg shadow-primary/20"
+            >
+              <span>Contact us</span>
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

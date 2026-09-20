@@ -1,0 +1,237 @@
+'use client';
+
+import Link from 'next/link';
+import { Footer } from '@/components/Footer';
+import { Navbar } from '@/components/Navbar';
+
+export default function TermsPage() {
+  return (
+    <div className="min-h-screen flex flex-col bg-surface">
+      <Navbar />
+
+      {/* Main Content */}
+      <main className="flex-1 pt-16 sm:pt-18">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 py-20 lg:py-32">
+          <div className="mb-12">
+            <Link href="/" className="inline-flex items-center gap-2 text-text-muted hover:text-primary transition-colors mb-6">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to home
+            </Link>
+            <h1 className="text-5xl font-bold text-text mb-4">Terms of Service</h1>
+            <p className="text-text-muted">Last updated: September 19, 2026</p>
+          </div>
+
+          <div className="prose prose-lg max-w-none">
+            <div className="space-y-8 text-text-muted">
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Agreement to Terms</h2>
+                <p className="leading-relaxed">
+                  By accessing or using Mprnt's self-service printing kiosks and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Service Description</h2>
+                <p className="leading-relaxed mb-4">
+                  Mprnt provides self-service printing kiosks that allow users to:
+                </p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>Upload documents via QR code-initiated mobile web interface</li>
+                  <li>Configure print settings (color, pages, copies)</li>
+                  <li>Make secure payments via UPI, cards, or digital wallets</li>
+                  <li>Collect printed documents from the kiosk output tray</li>
+                </ul>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Acceptable Use</h2>
+                <p className="leading-relaxed mb-4">You agree to use our services only for lawful purposes. You may not:</p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>Print materials that violate copyright, trademark, or intellectual property rights</li>
+                  <li>Print illegal, offensive, defamatory, or harmful content</li>
+                  <li>Print materials that promote violence, discrimination, or hate speech</li>
+                  <li>Upload malware, viruses, or malicious code</li>
+                  <li>Attempt to hack, damage, or interfere with our kiosks or systems</li>
+                  <li>Use the service for bulk commercial printing beyond reasonable personal use</li>
+                  <li>Share QR codes or sessions to allow unauthorized access</li>
+                </ul>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Pricing and Payment</h2>
+                <p className="leading-relaxed mb-4">
+                  Pricing is displayed clearly before you confirm your print job. Standard rates apply:
+                </p>
+                <ul className="list-disc pl-6 space-y-2 mb-4">
+                  <li>Black & white printing: Starting from ₹2 per page</li>
+                  <li>Color printing: Starting from ₹8 per page</li>
+                </ul>
+                <p className="leading-relaxed mb-4">
+                  Prices may vary by location and are set by the venue operator. All prices are inclusive of applicable taxes.
+                </p>
+                <p className="leading-relaxed">
+                  Payment must be completed before printing begins. We accept UPI, credit/debit cards, and digital wallets. All transactions are final and non-refundable except in cases of technical failure where no print was produced.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Refunds and Disputes</h2>
+                <p className="leading-relaxed mb-4">
+                  <strong>Refunds are provided only when:</strong>
+                </p>
+                <ul className="list-disc pl-6 space-y-2 mb-4">
+                  <li>Payment was processed but printing failed due to a technical error</li>
+                  <li>Incorrect number of pages were printed due to system error</li>
+                  <li>Print quality was defective due to equipment malfunction</li>
+                </ul>
+                <p className="leading-relaxed mb-4">
+                  <strong>Refunds will NOT be provided for:</strong>
+                </p>
+                <ul className="list-disc pl-6 space-y-2 mb-4">
+                  <li>User error in document upload or print configuration</li>
+                  <li>Document formatting issues present in the original file</li>
+                  <li>User dissatisfaction with document content</li>
+                  <li>Prints that were successfully completed but not collected</li>
+                </ul>
+                <p className="leading-relaxed">
+                  To request a refund, contact us at support@mprint.co within 48 hours of the transaction with your transaction ID and description of the issue.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Document Security and Privacy</h2>
+                <p className="leading-relaxed mb-4">
+                  We take your privacy seriously:
+                </p>
+                <ul className="list-disc pl-6 space-y-2 mb-4">
+                  <li>Documents are encrypted during transmission and storage</li>
+                  <li>All documents are automatically deleted within 15 minutes or immediately after printing</li>
+                  <li>We do not access, read, or store document content</li>
+                  <li>Each session is isolated and secure</li>
+                </ul>
+                <p className="leading-relaxed">
+                  See our <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link> for complete details.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">File Requirements</h2>
+                <p className="leading-relaxed mb-4">
+                  Accepted file formats:
+                </p>
+                <ul className="list-disc pl-6 space-y-2 mb-4">
+                  <li>PDF documents (.pdf)</li>
+                  <li>PNG images (.png)</li>
+                  <li>JPEG images (.jpg, .jpeg)</li>
+                </ul>
+                <p className="leading-relaxed">
+                  Maximum file size: 10MB per document. Files must be properly formatted and not corrupted. We are not responsible for printing issues caused by malformed or improperly created files.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Service Availability</h2>
+                <p className="leading-relaxed">
+                  While we strive for 24/7 availability, we do not guarantee uninterrupted service. Kiosks may be temporarily unavailable due to maintenance, technical issues, or circumstances beyond our control. We are not liable for any inconvenience or losses resulting from service interruptions.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Liability Limitations</h2>
+                <p className="leading-relaxed mb-4">
+                  Mprnt provides services "as is" without warranties of any kind. We are not liable for:
+                </p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>Document content, copyright violations, or legal issues arising from printed materials</li>
+                  <li>Print quality issues caused by source document problems</li>
+                  <li>Lost or uncollected prints left in the output tray</li>
+                  <li>Technical failures, service interruptions, or kiosk malfunctions</li>
+                  <li>Indirect, incidental, or consequential damages</li>
+                  <li>Data loss or security breaches beyond our reasonable control</li>
+                </ul>
+                <p className="leading-relaxed mt-4">
+                  Our maximum liability for any claim is limited to the amount paid for the specific transaction in question.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">User Responsibilities</h2>
+                <p className="leading-relaxed mb-4">You are responsible for:</p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>Ensuring you have the right to print the documents you upload</li>
+                  <li>Verifying print settings before confirming your order</li>
+                  <li>Collecting your prints promptly after completion</li>
+                  <li>Keeping your payment information secure</li>
+                  <li>Complying with all applicable laws and regulations</li>
+                  <li>Not leaving sensitive or confidential documents unattended</li>
+                </ul>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Intellectual Property</h2>
+                <p className="leading-relaxed">
+                  All content, trademarks, logos, and intellectual property associated with Mprnt services remain our exclusive property. You may not copy, modify, distribute, or create derivative works without our written permission.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Termination</h2>
+                <p className="leading-relaxed">
+                  We reserve the right to refuse service or terminate access to any user who violates these terms. We may also discontinue the service at any location with reasonable notice.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Changes to Terms</h2>
+                <p className="leading-relaxed">
+                  We may update these Terms of Service from time to time. Material changes will be posted at our kiosks. Continued use of our services after changes constitutes acceptance of the updated terms.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Governing Law</h2>
+                <p className="leading-relaxed">
+                  These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of courts in Bangalore, Karnataka.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold text-text mb-4">Contact Information</h2>
+                <p className="leading-relaxed mb-4">
+                  For questions about these Terms of Service, contact us:
+                </p>
+                <div className="bg-surface-secondary p-6 rounded-lg border border-border">
+                  <p className="mb-2"><strong>Email:</strong> legal@mprint.co</p>
+                  <p className="mb-2"><strong>Phone:</strong> +91 123 456 7890</p>
+                  <p><strong>Address:</strong> Mprnt Technologies Pvt. Ltd., Bangalore, India</p>
+                </div>
+              </section>
+
+              <section className="pt-8 border-t border-border">
+                <h2 className="text-2xl font-bold text-text mb-4">Related Documents</h2>
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/privacy" className="inline-flex items-center gap-2 px-6 py-3 bg-surface-secondary border border-border rounded-lg hover:border-primary/40 transition-all">
+                    Privacy Policy
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </Link>
+                  <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-surface-secondary border border-border rounded-lg hover:border-primary/40 transition-all">
+                    Contact Us
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </Link>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
