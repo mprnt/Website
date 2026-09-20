@@ -129,21 +129,21 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
               {/* Step 1 */}
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   1
                 </div>
                 <div className="space-y-2 sm:space-y-3">
-                  <div className="w-full h-24 sm:h-28 md:h-32 bg-white rounded-lg flex items-center justify-center border border-border">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 grid grid-cols-4 gap-0.5">
+                  <div className="w-full h-20 sm:h-28 md:h-32 bg-white rounded-lg flex items-center justify-center border border-border overflow-hidden">
+                    <div className="w-14 h-14 sm:w-20 sm:h-20 grid grid-cols-4 gap-0.5">
                       {[...Array(16)].map((_, i) => (
                         <div key={i} className={`${Math.random() > 0.5 ? 'bg-gray-900' : 'bg-white'}`}></div>
                       ))}
                     </div>
                   </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-text">Scan QR code</h3>
+                  <h3 className="text-xs sm:text-base font-semibold text-text break-words">Scan QR code</h3>
                   <p className="text-xs sm:text-sm text-text-muted hidden sm:block">On the kiosk screen</p>
                 </div>
               </div>
@@ -165,7 +165,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 3 */}
-              <div className="text-center col-span-2 sm:col-span-1">
+              <div className="text-center sm:col-span-1">
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   3
                 </div>
@@ -205,7 +205,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 5 */}
-              <div className="text-center col-span-2 sm:col-span-1">
+              <div className="text-center sm:col-span-1">
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 shadow-lg shadow-primary/30">
                   5
                 </div>

@@ -34,7 +34,7 @@ export default function HowItWorksPage() {
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-primary text-white font-bold text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 shadow-lg shadow-primary/30">
                   1
                 </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text mb-3 sm:mb-4">Scan the QR code</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text mb-3 sm:mb-4 break-words">Scan the QR code</h2>
                 <p className="text-base sm:text-lg text-text-muted mb-4 sm:mb-6 leading-relaxed">
                   Every Mprnt kiosk displays a unique QR code on its screen. Simply open your phone's camera app and point it at the code. A notification will appear - tap it to open the printing interface.
                 </p>
@@ -61,19 +61,19 @@ export default function HowItWorksPage() {
               </div>
 
               <div className="relative">
-                <div className="bg-gradient-to-br from-border/50 to-border/20 rounded-2xl p-8">
-                  <div className="bg-surface rounded-xl p-12 text-center border border-border shadow-xl">
-                    <div className="inline-block p-8 bg-white rounded-xl mb-6 shadow-lg">
+                <div className="bg-gradient-to-br from-border/50 to-border/20 rounded-2xl p-4 sm:p-8 overflow-hidden">
+                  <div className="bg-surface rounded-xl p-6 sm:p-12 text-center border border-border shadow-xl">
+                    <div className="inline-block p-4 sm:p-8 bg-white rounded-xl mb-4 sm:mb-6 shadow-lg overflow-hidden">
                       {/* QR Code */}
-                      <div className="w-64 h-64 grid grid-cols-8 gap-1">
+                      <div className="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 grid grid-cols-8 gap-0.5 sm:gap-1">
                         {[...Array(64)].map((_, i) => (
                           <div key={i} className={`${Math.random() > 0.5 ? 'bg-gray-900' : 'bg-white'} rounded-sm`}></div>
                         ))}
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <div className="text-xl font-bold text-text">Scan to start printing</div>
-                      <div className="text-text-muted">Point your camera at this code</div>
+                      <div className="text-lg sm:text-xl font-bold text-text break-words">Scan to start printing</div>
+                      <div className="text-sm sm:text-base text-text-muted">Point your camera at this code</div>
                       <div className="inline-flex items-center gap-2 px-3 py-1 bg-success/10 text-success text-xs font-medium rounded-full mt-4">
                         <div className="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></div>
                         Active • Refreshes in 4:32
