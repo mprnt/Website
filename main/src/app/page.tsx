@@ -72,7 +72,7 @@ export default function HomePage() {
               </div>
 
               {/* Right: Product Visual */}
-              <div className="relative mt-8 lg:mt-0">
+              <div className="relative mt-8 lg:mt-0 hidden lg:block">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-3xl blur-3xl"></div>
                 <div className="relative bg-surface-secondary border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl">
                   {/* Kiosk Mockup */}
