@@ -24,6 +24,9 @@ export function Navbar() {
     } else {
       document.body.style.overflow = 'unset';
     }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [isMobileMenuOpen]);
 
   const navLinks = [
@@ -102,51 +105,63 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="lg:hidden fixed inset-0 top-20 sm:top-24 bg-black/70 z-40"
-            style={{ backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
+      {/* Mobile menu - Full screen overlay */}
+      <div
+        className={`lg:hidden fixed inset-0 z-40 bg-surface/95 overflow-y-auto transition-opacity duration-300 ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}
+      >
+        <div className="min-h-screen flex flex-col pt-24 pb-8 px-6">
+          {/* Navigation Links */}
+          <nav className="flex flex-col gap-2 mb-12">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-2xl font-bold text-text hover:text-primary transition-colors py-4 px-4 hover:bg-primary/5 rounded-lg"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-          {/* Menu panel - slide from right */}
-          <div
-            className="lg:hidden fixed top-20 sm:top-24 right-0 bottom-0 w-80 bg-surface shadow-2xl border-l border-border/30 overflow-y-auto z-50 animate-in slide-in-from-right"
-            style={{ backdropFilter: 'blur(40px)', WebkitBackdropFilter: 'blur(40px)' }}
+          {/* CTA Button */}
+          <button
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              router.push('/scan');
+            }}
+            className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-primary hover:bg-primary/90 text-white rounded-xl font-semibold text-lg transition-all shadow-lg shadow-primary/25 mb-8"
           >
-            <nav className="flex flex-col p-6 space-y-1 mt-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-medium text-text hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-lg transition-all"
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <span>Start Printing</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
 
-              <div className="pt-6 border-t border-border/30 mt-6">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    router.push('/scan');
-                  }}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold text-base transition-all shadow-lg shadow-primary/25"
-                >
-                  <span>Start Printing</span>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </button>
-              </div>
-            </nav>
+          {/* Spacer */}
+          <div className="flex-1" />
+
+          {/* Footer Links */}
+          <div className="border-t border-border/30 pt-8 text-sm">
+            <div className="flex flex-wrap gap-4 text-text-muted">
+              <Link href="/terms" className="hover:text-primary transition-colors">
+                Terms
+              </Link>
+              <span className="text-border">•</span>
+              <Link href="/privacy" className="hover:text-primary transition-colors">
+                Privacy
+              </Link>
+              <span className="text-border">•</span>
+              <Link href="/contact" className="hover:text-primary transition-colors">
+                Support
+              </Link>
+            </div>
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </header>
   );
 }
