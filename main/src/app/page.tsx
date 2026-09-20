@@ -13,9 +13,9 @@ export default function HomePage() {
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 pt-16 sm:pt-18">
+      <main className="flex-1 pt-20 sm:pt-24">
         {/* Hero Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden">
+        <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden bg-surface">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
               {/* Left: Content */}
