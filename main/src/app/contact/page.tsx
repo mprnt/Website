@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
+import { MODELS } from '@/lib/models';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Footer } from '@/components/Footer';
@@ -10,6 +11,13 @@ export default function ContactPage() {
   const router = useRouter();
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [interest, setInterest] = useState('');
+
+  // Pre-select the model when arriving from a "Enquire about Model N" link.
+  useEffect(() => {
+    const model = new URLSearchParams(window.location.search).get('model');
+    if (model && MODELS.some((m) => m.id === model)) setInterest(model);
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +29,7 @@ export default function ContactPage() {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
+      interest: formData.get('interest') as string,
       subject: formData.get('subject') as string,
       message: formData.get('message') as string,
     };
@@ -76,7 +85,7 @@ export default function ContactPage() {
               Get in touch
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto px-4">
-              Have questions about Mprnt? Want to install a kiosk at your location? We're here to help.
+              Questions about printing with MPRNT? Want MPRNT at your shop, campus or office? We're here to help.
             </p>
           </div>
         </section>
@@ -221,6 +230,28 @@ export default function ContactPage() {
                         className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                         placeholder="+91 98765 43210"
                       />
+                    </div>
+
+                    <div>
+                      <label htmlFor="interest" className="block text-sm font-medium text-text mb-2">
+                        I&apos;m interested in
+                      </label>
+                      <select
+                        id="interest"
+                        name="interest"
+                        value={interest}
+                        onChange={(e) => setInterest(e.target.value)}
+                        disabled={formState === 'submitting'}
+                        className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                      >
+                        <option value="">Printing as an individual / general question</option>
+                        {MODELS.map((m) => (
+                          <option key={m.id} value={m.id}>
+                            {m.label} · {m.name}
+                          </option>
+                        ))}
+                        <option value="unsure">Business - not sure which model yet</option>
+                      </select>
                     </div>
 
                     <div>

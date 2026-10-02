@@ -25,6 +25,9 @@
   --color-text: 26 26 26;            /* Near-black #1a1a1a */
   --color-text-muted: 122 122 122;   /* Grounded gray #7a7a7a */
 
+  /* ACCENT - warm "paper & ink" highlight used sparingly in diagrams */
+  --color-accent: 214 136 46;        /* Amber #d6882e */
+
   /* Status colors */
   --color-success: 34 197 94;        /* Green-600 #22c55e */
   --color-error: 220 38 38;          /* Red-600 #dc2626 */
@@ -40,6 +43,7 @@
   --color-text-muted: 160 158 155;   /* Light gray #a09e9b */
 
   /* Adjusted for dark mode visibility */
+  --color-primary: 52 148 92;        /* Brighter green #34945c - readable as text on dark */
   --color-primary-light: 80 190 130; /* Lighter green #50be82 */
   --color-secondary-light: 130 200 160; /* Lighter sage #82c8a0 */
 }
@@ -65,7 +69,7 @@ body {
   overflow-x: hidden;
   color: rgb(var(--color-text));
   background: rgb(var(--color-surface));
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -256,10 +260,111 @@ button {
   animation-delay: 0.6s;
 }
 
+/* ============================================================
+   REDESIGN: MOTION SYSTEM (diagrams, demo, ambient)
+   ============================================================ */
+
+/* Scroll reveal driven by <Reveal> (sets data-shown) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal[data-variant="left"] { transform: translateX(-24px); }
+.reveal[data-variant="right"] { transform: translateX(24px); }
+.reveal[data-variant="scale"] { transform: scale(0.94); }
+.reveal[data-shown="true"] { opacity: 1; transform: none; }
+
+/* Data packets travelling along diagram paths */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -24; }
+}
+.flow-line {
+  stroke-dasharray: 6 6;
+  animation: dash-flow 1.2s linear infinite;
+}
+
+/* Animated connector between diagram nodes (horizontal on md+, vertical below) */
+@keyframes connector-x { to { background-position: 24px 0; } }
+@keyframes connector-y { to { background-position: 0 24px; } }
+.flow-connector {
+  background-image: repeating-linear-gradient(90deg, rgb(var(--color-primary)) 0 8px, transparent 8px 16px);
+  background-size: 24px 2px;
+  animation: connector-x 0.9s linear infinite;
+}
+.flow-connector-y {
+  background-image: repeating-linear-gradient(180deg, rgb(var(--color-primary)) 0 8px, transparent 8px 16px);
+  background-size: 2px 24px;
+  animation: connector-y 0.9s linear infinite;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float { animation: float-y 5s ease-in-out infinite; }
+.animate-float-slow { animation: float-y 7s ease-in-out infinite; }
+
+/* Paper sliding out of a printer */
+@keyframes paper-out {
+  0% { transform: translateY(-100%); opacity: 0; }
+  15% { opacity: 1; }
+  60%, 100% { transform: translateY(0); opacity: 1; }
+}
+.animate-paper { animation: paper-out 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+
+@keyframes ping-ring {
+  0% { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.animate-ping-ring { animation: ping-ring 2.2s cubic-bezier(0, 0, 0.2, 1) infinite; transform-origin: center; transform-box: fill-box; }
+
+@keyframes scan-line {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(100%); }
+}
+.animate-scan { animation: scan-line 2.4s ease-in-out infinite; }
+
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.animate-screen { animation: screen-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes progress-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 32s linear infinite; }
+
+/* Subtle dotted grid used behind hero / diagrams */
+.bg-grid {
+  background-image: radial-gradient(rgb(var(--color-text) / 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
 /* High contrast for outdoor kiosk visibility */
 @media (prefers-contrast: more) {
   :root {
     --color-text: 0 0 0;
-    --color-primary: 0 0 139;  /* Darker blue */
+    --color-primary: 15 70 40;  /* Deeper green */
   }
 }

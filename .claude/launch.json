@@ -8,6 +8,12 @@
       "port": 3000,
       "autoPort": true,
       "cwd": "main"
+    },
+    {
+      "name": "mprnt-qr-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/akshatmahajan/mprnt-qr", "run", "dev", "--", "-p", "3005"],
+      "port": 3005
     }
   ]
 }

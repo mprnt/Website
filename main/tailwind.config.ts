@@ -29,6 +29,7 @@ const config: Config = {
           DEFAULT: "rgb(var(--color-text) / <alpha-value>)",
           muted: "rgb(var(--color-text-muted) / <alpha-value>)",
         },
+        accent: "rgb(var(--color-accent) / <alpha-value>)",
         success: "rgb(var(--color-success) / <alpha-value>)",
         error: "rgb(var(--color-error) / <alpha-value>)",
         warning: "rgb(var(--color-warning) / <alpha-value>)",
