@@ -1,186 +1,63 @@
-# MPrnt - Customer Mobile Web App
+# MPRNT Web (marketing site)
 
-**Your part:** Web development only - UI + mock API. Backend + Raspberry Pi integration comes later.
+Public marketing site for MPRNT: explains QR printing for customers and sells the four business models to shop owners. It is **not** the printing flow: customers print in the separate `mprnt-qr` app, and all data lives in `mprnt-backend`.
 
-## What This Is
+Stack: Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS.
 
-The customer-facing mobile web app for MPrnt's self-service printing kiosks. Users scan a QR code on the kiosk, land here, upload a document, configure print settings, pay, and watch the status. The full journey:
-
-1. **Start** - Welcome + QR session init
-2. **Upload** - PDF/image file upload
-3. **Configure** - Color/B&W, copies, duplex, live price
-4. **Review** - Order summary
-5. **Payment** - Mock payment (Razorpay placeholder)
-6. **Printing** - Real-time status polling
-7. **Complete** - Success + retrieval instructions
-
-Right now everything is **mocked** - no real backend, no real payment, no real Pi. The API calls in `src/lib/api.ts` simulate what the real backend will return. When your backend is ready, you'll swap those mock functions for real `fetch()` calls.
-
----
-
-## 🎨 Two-Color Theme System
-
-**Change your brand colors in ONE place:** `src/app/globals.css`
-
-```css
-:root {
-  /* PRIMARY brand color - main actions, headers, focus states */
-  --color-primary: 37 99 235;        /* Blue-600 #2563eb */
-  --color-primary-dark: 29 78 216;   /* Blue-700 #1d4ed8 */
-
-  /* SECONDARY brand color - accents, highlights, secondary actions */
-  --color-secondary: 249 115 22;     /* Orange-600 #f97316 */
-  --color-secondary-dark: 234 88 12; /* Orange-700 #ea580c */
-}
-```
-
-Change those RGB values and the entire app updates - buttons, progress bars, radio buttons, price tags, everything. That's it. No hunting through components.
-
-The Tailwind config maps these CSS vars to semantic classes like `bg-primary`, `text-secondary`, `border-primary` with alpha support, so you never write hex codes in components.
-
----
-
-## Project Structure
-
-```
-frontend/customer-web/
-├── src/
-│   ├── app/                    # Next.js 14 App Router pages
-│   │   ├── page.tsx           # 1. Start / QR welcome
-│   │   ├── upload/page.tsx    # 2. Document upload
-│   │   ├── configure/page.tsx # 3. Print settings + live price
-│   │   ├── review/page.tsx    # 4. Order summary
-│   │   ├── payment/page.tsx   # 5. Mock payment
-│   │   ├── printing/page.tsx  # 6. Status polling + progress
-│   │   ├── complete/page.tsx  # 7. Success + retrieval
-│   │   ├── layout.tsx         # Root layout + OrderProvider
-│   │   └── globals.css        # ⭐ THEME - change colors here
-│   ├── components/             # Reusable UI on theme tokens
-│   │   ├── Button.tsx
-│   │   ├── Card.tsx
-│   │   ├── Counter.tsx
-│   │   ├── ProgressBar.tsx
-│   │   ├── RadioOption.tsx
-│   │   ├── Screen.tsx
-│   │   ├── StepHeader.tsx
-│   │   └── PriceTag.tsx
-│   ├── context/
-│   │   └── OrderContext.tsx   # Client state + sessionStorage
-│   └── lib/
-│       ├── api.ts             # Mock API matching backend contract
-│       └── pricing.ts         # Price calculation logic
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-└── next.config.js
-```
-
----
-
-## Getting Started
-
-### 1. Install dependencies
+## Run it
 
 ```bash
-cd frontend/customer-web
+cd main
+cp .env.example .env.local   # then edit the values
 npm install
+npm run dev                  # http://localhost:3000
 ```
 
-### 2. Run the dev server
+| Script | What it does |
+|---|---|
+| `npm run dev` | Development server |
+| `npm run build` / `npm start` | Production build / serve it |
+| `npm run lint` | ESLint (`next/core-web-vitals`) |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm test` | Unit tests with Node's built-in runner (`tests/*.test.ts`, needs Node 22.18+ for TypeScript) |
 
-```bash
-npm run dev
-```
+## Environment variables
 
-Open [http://localhost:3000](http://localhost:3000) on your phone or browser. You'll see the welcome screen. Tap through the full flow - upload a test PDF, configure, "pay" (mocked), watch the printing status, and reach completion. All 7 screens work end-to-end with zero backend.
+| Name | Required | Used for |
+|---|---|---|
+| `NEXT_PUBLIC_API_URL` | Yes, for the contact form | Base URL of the backend API including `/api/v1`. The contact form POSTs to `${NEXT_PUBLIC_API_URL}/public/leads`. Its origin is also allowed in the Content-Security-Policy `connect-src`. Without it the form shows "not configured". |
+| `NEXT_PUBLIC_SITE_URL` | Recommended in production | Public URL of this site, for canonical links, `sitemap.xml` and `robots.txt`. Defaults to `https://mprint.co`. |
 
-### 3. Build for production
+Both are read at **build time**; rebuild after changing them. The backend must list this site's origin in its `CORS_ORIGIN`.
 
-```bash
-npm run build
-npm start
-```
+## Routes
 
----
+| Path | Page |
+|---|---|
+| `/` | Home: phone demo, system diagram, business models |
+| `/how-it-works` | Customer printing steps |
+| `/for-businesses` | The four business models and comparison table (`#model-1`, `#model-2a`, `#model-2b`, `#model-3`, `#compare`) |
+| `/contact` | Contact / business enquiry form (`?model=<id>` preselects a model) |
+| `/faq`, `/help` | FAQ and help center |
+| `/privacy`, `/terms` | Legal pages |
+| `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` |
 
-## How the Mock API Works
+## Where content lives
 
-`src/lib/api.ts` has functions that **match the shape of your real backend** (from `backend/API-Design.md`):
+| File | Single source for |
+|---|---|
+| `src/lib/models.ts` | Business models and the comparison table (home, `/for-businesses`, contact dropdown) |
+| `src/lib/pricing.ts` | Standard per-page prices shown on FAQ, Terms and the phone demo. Mirrors the backend platform default in `mprnt-backend` (`pricingService.ts`); update both together. |
+| `src/lib/site.ts` | Brand name, domain, phone number and mailboxes. **The phone and domain are placeholders until confirmed.** |
+| `src/lib/seo.ts` | Route list for the sitemap and the per-page metadata helper |
+| `src/lib/leads.ts` | Contact form validation, payload and submission to the backend |
 
-- `createSession(qrToken)` → mock session
-- `uploadDocument(file)` → mock doc with random page count
-- `getQuote(...)` → price calculation
-- `initializePayment(...)` → mock payment intent
-- `getPrintJobStatus(jobId)` → random status (QUEUED → PRINTING → COMPLETED)
-- `mockPaymentSuccess()` → simulates webhook → job created
+Each route sets its own title and description: server pages export `metadata` directly; client pages get it from a small `layout.tsx` beside them.
 
-When your real backend is running, replace these functions with actual `fetch()` calls to `https://your-backend/v1/...`. The rest of the app stays the same because the function signatures match.
+## Security
 
----
+`next.config.js` sends security headers on every response (CSP, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS). If you add a third-party script, image host or API, add its origin to the CSP there.
 
-## Flow State
+## Deploy
 
-`OrderContext` (React Context + sessionStorage) holds the order across page navigation:
-
-- `sessionToken`, `kioskId`
-- `document` (id, fileName, pageCount)
-- `config` (color, copies, duplex)
-- `quote` (amount)
-- `paymentId`, `jobId`
-
-SessionStorage means the order survives page refreshes. When the user finishes or starts a new print, `resetOrder()` clears it.
-
----
-
-## Pricing Logic
-
-`src/lib/pricing.ts` is the **single source of truth** for prices:
-
-```ts
-export const PRICING_CONFIG = {
-  bwPricePerPage: 2.0,      // ₹2 per page for B&W
-  colorPricePerPage: 5.0,   // ₹5 per page for Color
-  currency: '₹',
-};
-```
-
-Change those numbers and the whole app updates. The backend will have its own `pricing_versions` table (from `database/Database-Design.md`), and eventually you'll fetch pricing from the API instead of hardcoding it here. For now, this matches your MVP scope.
-
----
-
-## Next Steps (When Backend is Ready)
-
-1. **Replace mock API functions** in `src/lib/api.ts` with real `fetch()` calls.
-2. **Add real payment integration** - replace the mock payment button with Razorpay's SDK (test mode).
-3. **Connect to real job polling** - `GET /print-jobs/:id` with actual status from the Pi.
-4. **QR token parsing** - extract `kioskId` from URL param instead of hardcoding `mockQrToken`.
-5. **Error handling** - add real error states (payment failed, printer offline, etc. per `security/Failure-Handler.md`).
-
----
-
-## Design Notes
-
-**Mobile-first, high-contrast for outdoor kiosks.** The UI follows your `product/UI-UX-Specs.md`:
-
-- Large touch targets (buttons are 48px+ tall)
-- Clear step indicators (Stepper component)
-- Real-time feedback (progress bars, status messages)
-- No tiny text or low-contrast grays
-
-The color theme (blue + orange by default) is intentional, not a template default. Change it in `globals.css` if the design discussion shifts to a different palette.
-
----
-
-## Tech Stack
-
-- **Next.js 14** (App Router, React 18, TypeScript)
-- **Tailwind CSS** (utility-first, theme tokens mapped to CSS vars)
-- **No backend/database yet** - all mocked for now
-
----
-
-## Questions?
-
-This is your slice - fully functional UI + mock API, stops cleanly at the backend boundary. When your teammate finishes the Pi daemon and you build the backend (phases M1–M2 from the build plan), you'll wire this to the real endpoints. Until then, this runs standalone and demos the entire customer journey.
-
-**To change the theme:** edit `src/app/globals.css` (the two `--color-primary` and `--color-secondary` lines). That's it.
+Any Node host or Vercel: set the two environment variables, run `npm run build`, serve with `npm start`. Every page is prerendered as static HTML.

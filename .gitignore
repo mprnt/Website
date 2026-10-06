@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# env files (keep the committed example)
+.env*
+!.env.example

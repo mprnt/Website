@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Icon, type IconName } from './Icons';
+import { PRICING, calculatePrice, formatRupees } from '@/lib/pricing';
 
 export const DEMO_STEPS: { title: string; caption: string; icon: IconName }[] = [
   { title: 'Scan the QR', caption: 'Point your phone camera at the MPRNT QR at the shop or station.', icon: 'qr' },
@@ -13,10 +14,15 @@ export const DEMO_STEPS: { title: string; caption: string; icon: IconName }[] = 
 ];
 
 // Shared demo order, so Settings and Review always agree.
+const DEMO_PAGES = 12;
+export const DEMO_TOTAL = formatRupees(calculatePrice({ pages: DEMO_PAGES, color: false, copies: 1 }));
+const BW = formatRupees(PRICING.bwPerPage);
+const COLOR = formatRupees(PRICING.colorPerPage);
+
 const ORDER = [
   ['Colour', 'B&W'],
   ['Copies', '1'],
-  ['Page range', 'All (12)'],
+  ['Page range', `All (${DEMO_PAGES})`],
   ['Paper size', 'A4'],
   ['Orientation', 'Portrait'],
   ['Sides', 'Single'],
@@ -94,14 +100,14 @@ function Screen({ step }: { step: number }) {
               <span className="w-3.5 h-3.5 rounded-full bg-text flex-shrink-0" />
               <span>
                 <span className="block text-[10px] font-semibold text-text leading-tight">B&amp;W</span>
-                <span className="block text-[9px] text-text-muted">₹2 / page</span>
+                <span className="block text-[9px] text-text-muted">{BW} / page</span>
               </span>
             </div>
             <div className="rounded-lg border border-border px-2 py-1.5 flex items-center gap-1.5">
               <span className="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-accent via-error to-primary flex-shrink-0" />
               <span>
                 <span className="block text-[10px] font-semibold text-text leading-tight">Colour</span>
-                <span className="block text-[9px] text-text-muted">₹5 / page</span>
+                <span className="block text-[9px] text-text-muted">{COLOR} / page</span>
               </span>
             </div>
           </div>
@@ -120,9 +126,9 @@ function Screen({ step }: { step: number }) {
           <div className="mt-auto flex items-center justify-between rounded-lg bg-primary/10 px-2.5 py-2">
             <span>
               <span className="block text-[9px] text-text-muted">Estimated cost</span>
-              <span className="block text-[9px] text-text-muted">12 pages · ₹2/page</span>
+              <span className="block text-[9px] text-text-muted">{DEMO_PAGES} pages · {BW}/page</span>
             </span>
-            <span className="text-sm font-black text-primary">₹24</span>
+            <span className="text-sm font-black text-primary">{DEMO_TOTAL}</span>
           </div>
         </div>
       );
@@ -151,22 +157,22 @@ function Screen({ step }: { step: number }) {
           </div>
           <div className="rounded-lg bg-primary/10 px-2.5 py-1.5">
             <div className="flex justify-between text-[9px] text-text-muted">
-              <span>₹2 × 12 pages × 1 copy</span>
+              <span>{BW} × {DEMO_PAGES} pages × 1 copy</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-semibold text-text">Total</span>
-              <span className="text-sm font-black text-primary">₹24</span>
+              <span className="text-sm font-black text-primary">{DEMO_TOTAL}</span>
             </div>
           </div>
           <div className="mt-auto rounded-lg bg-primary text-white text-[11px] font-bold text-center py-2.5 flex items-center justify-center gap-1.5">
-            Proceed to payment · ₹24 <Icon name="arrow" className="w-3.5 h-3.5" />
+            Proceed to payment · {DEMO_TOTAL} <Icon name="arrow" className="w-3.5 h-3.5" />
           </div>
         </div>
       );
     case 4:
       return (
         <div className="h-full flex flex-col gap-2">
-          <div className="text-xs font-bold text-text">Pay ₹24</div>
+          <div className="text-xs font-bold text-text">Pay {DEMO_TOTAL}</div>
           {[
             ['UPI', 'GPay · PhonePe · Paytm', true],
             ['Card', 'Debit / credit', false],

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 import { Icon, type IconName } from '@/components/site/Icons';
-import { PhoneDemo } from '@/components/site/PhoneDemo';
+import { DEMO_TOTAL, PhoneDemo } from '@/components/site/PhoneDemo';
 import { Reveal, SectionHeader } from '@/components/site/Reveal';
 import { SystemDiagram } from '@/components/site/Diagrams';
 
@@ -109,7 +109,7 @@ export default function HomePage() {
                 </span>
                 <span>
                   <span className="block text-xs font-bold text-text">Payment received</span>
-                  <span className="block text-[11px] text-text-muted">₹24 · UPI</span>
+                  <span className="block text-[11px] text-text-muted">{DEMO_TOTAL} · UPI</span>
                 </span>
               </div>
               <div className="hidden sm:flex absolute bottom-24 -right-2 lg:-right-4 animate-float-slow items-center gap-2 rounded-2xl bg-surface border border-border shadow-xl px-3.5 py-2.5">

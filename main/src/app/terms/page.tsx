@@ -1,8 +1,16 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PRICING, formatRupees } from '@/lib/pricing';
+import { SITE } from '@/lib/site';
+import { pageMetadata } from '@/lib/seo';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/terms',
+  title: 'Terms of Service',
+  description: 'The terms that apply when you print with MPRNT: pricing, payments, refunds and acceptable use.',
+});
 
 export default function TermsPage() {
   return (
@@ -65,8 +73,8 @@ export default function TermsPage() {
                   Pricing is displayed clearly before you confirm your print job. Standard rates apply:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 mb-4">
-                  <li>Black & white printing: Starting from ₹2 per page</li>
-                  <li>Color printing: Starting from ₹8 per page</li>
+                  <li>Black & white printing: {formatRupees(PRICING.bwPerPage)} per page (standard rate)</li>
+                  <li>Color printing: {formatRupees(PRICING.colorPerPage)} per page (standard rate)</li>
                 </ul>
                 <p className="leading-relaxed mb-4">
                   Prices may vary by location and are set by the venue operator. All prices are inclusive of applicable taxes.
@@ -96,7 +104,7 @@ export default function TermsPage() {
                   <li>Prints that were successfully completed but not collected</li>
                 </ul>
                 <p className="leading-relaxed">
-                  To request a refund, contact us at support@mprint.co within 48 hours of the transaction with your transaction ID and description of the issue.
+                  To request a refund, contact us at {SITE.email.support} within 48 hours of the transaction with your transaction ID and description of the issue.
                 </p>
               </section>
 
@@ -203,8 +211,8 @@ export default function TermsPage() {
                   For questions about these Terms of Service, contact us:
                 </p>
                 <div className="bg-surface-secondary p-6 rounded-lg border border-border">
-                  <p className="mb-2"><strong>Email:</strong> legal@mprint.co</p>
-                  <p className="mb-2"><strong>Phone:</strong> +91 123 456 7890</p>
+                  <p className="mb-2"><strong>Email:</strong> {SITE.email.legal}</p>
+                  <p className="mb-2"><strong>Phone:</strong> {SITE.phone.display}</p>
                   <p><strong>Address:</strong> Mprnt Technologies Pvt. Ltd., Bangalore, India</p>
                 </div>
               </section>

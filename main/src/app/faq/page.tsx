@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 import { useState } from 'react';
+import { PRICING, formatRupees } from '@/lib/pricing';
+import { SITE } from '@/lib/site';
 
 const faqs = [
   {
@@ -29,7 +31,7 @@ const faqs = [
     questions: [
       {
         q: 'How much does printing cost?',
-        a: 'Black & white printing starts at ₹2 per page, and color printing starts at ₹8 per page. Exact pricing may vary by location and is displayed before you confirm your order.',
+        a: `The standard rate is ${formatRupees(PRICING.bwPerPage)} per page for black & white and ${formatRupees(PRICING.colorPerPage)} per page for color. Some locations set their own rates, so the exact total is always shown before you pay.`,
       },
       {
         q: 'What payment methods do you accept?',
@@ -63,11 +65,11 @@ const faqs = [
     questions: [
       {
         q: 'What if the kiosk is not working?',
-        a: 'Kiosks have real-time monitoring. If a kiosk is offline, it will display an error message. Try another nearby kiosk or contact support at support@mprint.co.',
+        a: `Kiosks have real-time monitoring. If a kiosk is offline, it will display an error message. Try another nearby kiosk or contact support at ${SITE.email.support}.`,
       },
       {
         q: 'My payment went through but nothing printed. What do I do?',
-        a: 'Check the output tray first. If your prints are not there, contact support@mprint.co with your transaction ID within 48 hours for a refund.',
+        a: `Check the output tray first. If your prints are not there, contact ${SITE.email.support} with your transaction ID within 48 hours for a refund.`,
       },
       {
         q: 'Can I print double-sided?',
@@ -84,7 +86,7 @@ const faqs = [
     questions: [
       {
         q: 'How do I install an Mprnt kiosk at my location?',
-        a: 'Fill out our contact form or email us at business@mprint.co. We\'ll discuss location requirements, installation, pricing, and next steps.',
+        a: `Fill out our contact form or email us at ${SITE.email.business}. We'll discuss location requirements, installation, pricing, and next steps.`,
       },
       {
         q: 'What revenue share do venue owners receive?',

@@ -1,5 +1,4 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
@@ -7,6 +6,7 @@ import { Icon, type IconName } from '@/components/site/Icons';
 import { PhoneDemo } from '@/components/site/PhoneDemo';
 import { Reveal, SectionHeader } from '@/components/site/Reveal';
 import { FlowDiagram, ModelArt } from '@/components/site/Diagrams';
+import { pageMetadata } from '@/lib/seo';
 
 const settings: { icon: IconName; title: string; body: string }[] = [
   { icon: 'paper', title: 'PDF, PNG & JPG', body: 'Upload documents or photos straight from your phone storage or cloud apps.' },
@@ -14,6 +14,12 @@ const settings: { icon: IconName; title: string; body: string }[] = [
   { icon: 'wallet', title: 'Pay your way', body: 'UPI, debit/credit cards and wallets - the total is shown before you pay.' },
   { icon: 'bolt', title: 'Starts instantly', body: 'Once payment succeeds the job is sent straight to the printer.' },
 ];
+
+export const metadata: Metadata = pageMetadata({
+  path: '/how-it-works',
+  title: 'How It Works',
+  description: 'Scan the QR, upload from your phone, pick colour or B&W, pay by UPI or card, and collect your prints. No app, no sign-up.',
+});
 
 export default function HowItWorksPage() {
   return (

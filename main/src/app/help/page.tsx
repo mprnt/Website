@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
+import { SITE } from '@/lib/site';
 
 const helpCategories = [
   {
@@ -218,7 +219,7 @@ export default function HelpPage() {
                 </svg>
               </button>
               <Link
-                href="mailto:support@mprint.co"
+                href={`mailto:${SITE.email.support}`}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-surface-secondary border border-border hover:border-primary/40 text-text rounded-lg font-semibold text-lg transition-all"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

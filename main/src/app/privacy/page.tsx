@@ -1,8 +1,15 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { SITE } from '@/lib/site';
+import { pageMetadata } from '@/lib/seo';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/privacy',
+  title: 'Privacy Policy',
+  description: 'How MPRNT handles your documents, payments and contact details. Files are deleted automatically after printing.',
+});
 
 export default function PrivacyPage() {
   return (
@@ -160,8 +167,8 @@ export default function PrivacyPage() {
                   If you have questions about this Privacy Policy or our data practices, please contact us:
                 </p>
                 <div className="bg-surface-secondary p-6 rounded-lg border border-border">
-                  <p className="mb-2"><strong>Email:</strong> privacy@mprint.co</p>
-                  <p className="mb-2"><strong>Phone:</strong> +91 123 456 7890</p>
+                  <p className="mb-2"><strong>Email:</strong> {SITE.email.privacy}</p>
+                  <p className="mb-2"><strong>Phone:</strong> {SITE.phone.display}</p>
                   <p><strong>Address:</strong> Mprnt Technologies Pvt. Ltd., Bangalore, India</p>
                 </div>
               </section>

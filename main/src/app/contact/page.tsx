@@ -3,12 +3,12 @@
 import { useEffect, useState, FormEvent } from 'react';
 import { MODELS } from '@/lib/models';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { buildLeadPayload, submitLead, validateLead } from '@/lib/leads';
+import { SITE } from '@/lib/site';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 
 export default function ContactPage() {
-  const router = useRouter();
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [interest, setInterest] = useState('');
@@ -24,51 +24,44 @@ export default function ContactPage() {
     setFormState('submitting');
     setErrors({});
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string,
-      interest: formData.get('interest') as string,
-      subject: formData.get('subject') as string,
-      message: formData.get('message') as string,
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const field = (key: string) => (formData.get(key) as string | null) ?? '';
+    const input = {
+      name: field('name'),
+      email: field('email'),
+      phone: field('phone'),
+      company: field('company'),
+      interest: field('interest'),
+      subject: field('subject'),
+      message: field('message'),
+      website: field('website'),
     };
+    const model = MODELS.find((m) => m.id === input.interest);
+    const interestLabel = model
+      ? `${model.label} · ${model.name}`
+      : input.interest === 'unsure'
+        ? 'Business - not sure which model yet'
+        : undefined;
 
-    // Validation
-    const newErrors: Record<string, string> = {};
-    if (!data.name || data.name.trim().length < 2) {
-      newErrors.name = 'Please enter your full name';
-    }
-    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-    if (!data.subject || data.subject.trim().length < 3) {
-      newErrors.subject = 'Please enter a subject';
-    }
-    if (!data.message || data.message.trim().length < 10) {
-      newErrors.message = 'Please enter a message (at least 10 characters)';
-    }
-
+    const newErrors = validateLead(input);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       setFormState('error');
       return;
     }
 
-    // Simulate API call
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // In a real app, you would send this to your backend
-      console.log('Form submitted:', data);
-
+    const result = await submitLead(
+      buildLeadPayload({ ...input, interestLabel }),
+      process.env.NEXT_PUBLIC_API_URL,
+    );
+    if (result.ok) {
       setFormState('success');
-
-      // Reset form
-      (e.target as HTMLFormElement).reset();
-    } catch (error) {
+      form.reset();
+      setInterest('');
+    } else {
       setFormState('error');
-      setErrors({ submit: 'Failed to send message. Please try again.' });
+      setErrors({ submit: result.error });
     }
   };
 
@@ -107,8 +100,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <div className="font-semibold text-text mb-1">Email</div>
-                      <a href="mailto:support@mprint.co" className="text-text-muted hover:text-primary transition-colors">
-                        support@mprint.co
+                      <a href={`mailto:${SITE.email.support}`} className="text-text-muted hover:text-primary transition-colors">
+                        {SITE.email.support}
                       </a>
                     </div>
                   </div>
@@ -121,8 +114,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <div className="font-semibold text-text mb-1">Phone</div>
-                      <a href="tel:+911234567890" className="text-text-muted hover:text-primary transition-colors">
-                        +91 123 456 7890
+                      <a href={`tel:${SITE.phone.tel}`} className="text-text-muted hover:text-primary transition-colors">
+                        {SITE.phone.display}
                       </a>
                     </div>
                   </div>
@@ -164,7 +157,7 @@ export default function ContactPage() {
                   <h2 className="text-xl sm:text-2xl font-bold text-text mb-4 sm:mb-6">Send us a message</h2>
 
                   {formState === 'success' && (
-                    <div className="mb-6 p-4 bg-success/10 border border-success/30 rounded-lg">
+                    <div role="status" className="mb-6 p-4 bg-success/10 border border-success/30 rounded-lg">
                       <div className="flex gap-3">
                         <svg className="w-5 h-5 text-success flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -177,7 +170,12 @@ export default function ContactPage() {
                     </div>
                   )}
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                    {/* Honeypot: hidden from people, filled in by bots. Leave empty. */}
+                    <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                      <label htmlFor="website">Website</label>
+                      <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+                    </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
@@ -227,9 +225,29 @@ export default function ContactPage() {
                         id="phone"
                         name="phone"
                         disabled={formState === 'submitting'}
-                        className="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                        className={`w-full px-4 py-3 bg-surface border ${errors.phone ? 'border-red-500' : 'border-border'} rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all`}
                         placeholder="+91 98765 43210"
                       />
+                      {errors.phone && (
+                        <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="company" className="block text-sm font-medium text-text mb-2">
+                        Company / shop name (optional)
+                      </label>
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        disabled={formState === 'submitting'}
+                        className={`w-full px-4 py-3 bg-surface border ${errors.company ? 'border-red-500' : 'border-border'} rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all`}
+                        placeholder="Campus Copy Centre"
+                      />
+                      {errors.company && (
+                        <p className="mt-1 text-sm text-red-500">{errors.company}</p>
+                      )}
                     </div>
 
                     <div>
@@ -293,7 +311,7 @@ export default function ContactPage() {
                     </div>
 
                     {errors.submit && (
-                      <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+                      <div role="alert" className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
                         <p className="text-sm text-red-500">{errors.submit}</p>
                       </div>
                     )}
