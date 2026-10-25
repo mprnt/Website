@@ -5,17 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './site/Icons';
+import { MprntLogo } from './MprntLogo';
 
 export function Logo({ size = 'md' }: { size?: 'sm' | 'md' }) {
   return (
     <span className="flex items-center gap-2.5">
-      <span className={`relative flex items-center justify-center rounded-xl bg-primary text-white shadow-md shadow-primary/30 ${size === 'sm' ? 'w-8 h-8' : 'w-9 h-9'}`}>
-        <Icon name="printer" className="w-[18px] h-[18px]" />
-        <span className="absolute -right-0.5 -top-0.5 w-2.5 h-2.5 rounded-full bg-accent ring-2 ring-surface" />
-      </span>
+      <MprntLogo variant="mark" aria-hidden="true" className={`w-auto shrink-0 text-primary ${size === 'sm' ? 'h-8' : 'h-10'}`} />
       <span className="flex flex-col leading-none">
-        <span className="text-lg font-black text-text tracking-tight">MPRNT</span>
-        <span className="text-[9px] text-text-muted tracking-[0.2em] uppercase">Smart printing</span>
+        <MprntLogo variant="wordmark" title="MPRNT" className="h-4 w-auto text-text" />
+        <span className="mt-1.5 text-[9px] text-text-muted tracking-[0.2em] uppercase">Smart printing</span>
       </span>
     </span>
   );
