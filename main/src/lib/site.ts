@@ -16,6 +16,11 @@ export const SITE = {
     display: '+91 89894 94417',
     tel: '+918989494417',
   },
+  // The official company pages. The share tokens on the copied links are not kept.
+  social: {
+    linkedin: { handle: '/showcase/mprnt', url: 'https://www.linkedin.com/showcase/mprnt/' },
+    instagram: { handle: '@mprnt.in', url: 'https://www.instagram.com/mprnt.in/' },
+  },
   // One official mailbox handles support, business, privacy and legal queries.
   email: {
     support: email,

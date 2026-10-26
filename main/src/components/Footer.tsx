@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Logo } from './Navbar';
+import { SITE } from '../lib/site';
 
 interface FooterProps {
   compact?: boolean;
@@ -62,6 +63,26 @@ export function Footer({ compact = false }: FooterProps) {
             <p className="mt-5 max-w-sm text-sm text-text-muted leading-relaxed">
               From existing printers to smart printing stations. MPRNT lets anyone print from their phone - and lets any business offer it.
             </p>
+            <ul className="mt-6 space-y-3">
+              <li>
+                <a href={SITE.social.linkedin.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-text-muted hover:text-primary transition-colors">
+                  <svg aria-hidden="true" className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5c0-1.2-.02-2.73-1.66-2.73-1.67 0-1.92 1.3-1.92 2.64V21h-4z" />
+                  </svg>
+                  LinkedIn · {SITE.social.linkedin.handle}
+                </a>
+              </li>
+              <li>
+                <a href={SITE.social.instagram.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-text-muted hover:text-primary transition-colors">
+                  <svg aria-hidden="true" className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
+                  </svg>
+                  Instagram · {SITE.social.instagram.handle}
+                </a>
+              </li>
+            </ul>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
             {columns.map((c) => (
