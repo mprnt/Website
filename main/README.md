@@ -26,7 +26,7 @@ npm run dev                  # http://localhost:3000
 | Name | Required | Used for |
 |---|---|---|
 | `NEXT_PUBLIC_API_URL` | Yes, for the contact form | Base URL of the backend API including `/api/v1`. The contact form POSTs to `${NEXT_PUBLIC_API_URL}/public/leads`. Its origin is also allowed in the Content-Security-Policy `connect-src`. Without it the form shows "not configured". |
-| `NEXT_PUBLIC_SITE_URL` | Recommended in production | Public URL of this site, for canonical links, `sitemap.xml` and `robots.txt`. Defaults to `https://mprint.co`. |
+| `NEXT_PUBLIC_SITE_URL` | Recommended in production | Public URL of this site, for canonical links, `sitemap.xml` and `robots.txt`. Defaults to `https://www.mprnt.in`. |
 
 Both are read at **build time**; rebuild after changing them. The backend must list this site's origin in its `CORS_ORIGIN`.
 

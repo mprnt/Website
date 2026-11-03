@@ -4,8 +4,10 @@ import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 import { Icon } from '@/components/site/Icons';
 import { Reveal } from '@/components/site/Reveal';
-import { pageMetadata } from '@/lib/seo';
+import { CATEGORIES } from '@/lib/faq';
+import { faqJsonLd, pageMetadata } from '@/lib/seo';
 import { SITE } from '@/lib/site';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { FaqSections } from './FaqSections';
 
 export const metadata: Metadata = pageMetadata({
@@ -18,6 +20,7 @@ export const metadata: Metadata = pageMetadata({
 export default function FAQPage() {
   return (
     <div className="min-h-screen flex flex-col bg-surface">
+      <JsonLd data={faqJsonLd(CATEGORIES.flatMap((c) => c.faqs))} />
       <Navbar />
 
       <main className="flex-1">

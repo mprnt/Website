@@ -1,8 +1,8 @@
 // Single source for the brand's contact details and public URL.
 // Contact details are the official ones from the MPRNT Terms & Privacy Policy.
-// PLACEHOLDER: the mprint.co domain (used only for the public site URL) is not
-// confirmed yet. Every page reads from this file.
-const domain = 'mprint.co';
+// The live site is served at www.mprnt.in (mprnt.in redirects to it), so that is
+// the canonical host for canonical links, sitemap.xml, robots.txt and JSON-LD.
+const domain = 'www.mprnt.in';
 const email = 'mprntindore@gmail.com';
 
 export const SITE = {
